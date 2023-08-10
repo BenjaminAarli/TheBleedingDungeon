@@ -1,0 +1,102 @@
+[gd_scene load_steps=3 format=3 uid="uid://do4xhmali4t43"]
+
+[ext_resource type="Script" path="res://Editor/Dabs/Scripts/dab_branch_edit.gd" id="1_ocipt"]
+[ext_resource type="PackedScene" uid="uid://7k2hnnvj5mfj" path="res://test/testtab.tscn" id="3_1pbiv"]
+
+[node name="Dab_Branch_edit"]
+anchors_preset = 0
+anchor_right = 0.0
+offset_right = 530.0
+offset_bottom = 211.0
+grow_horizontal = 1
+script = ExtResource("1_ocipt")
+
+[node name="VBoxContainer" parent="HBoxContainer" index="2"]
+size_flags_horizontal = 2
+
+[node name="Tree" type="OptionButton" parent="HBoxContainer/VBoxContainer/HBoxContainer" index="0"]
+unique_name_in_owner = true
+layout_mode = 2
+item_count = 1
+popup/item_0/text = "Tree"
+popup/item_0/id = 0
+
+[node name="Branch" type="OptionButton" parent="HBoxContainer/VBoxContainer/HBoxContainer" index="1"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+item_count = 1
+selected = 0
+popup/item_0/text = "Grab the shovel"
+popup/item_0/id = 0
+
+[node name="HideUnhide" type="OptionButton" parent="HBoxContainer/VBoxContainer/HBoxContainer" index="2"]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 1
+item_count = 3
+selected = 0
+popup/item_0/text = "Hide/Show"
+popup/item_0/id = 0
+popup/item_1/text = "Hide"
+popup/item_1/id = 1
+popup/item_2/text = "Show"
+popup/item_2/id = 2
+
+[node name="die" type="Button" parent="HBoxContainer/VBoxContainer/HBoxContainer" index="3"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+text = "X"
+
+[node name="ShowHideButtons" type="HBoxContainer" parent="HBoxContainer/VBoxContainer" index="1"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VisibilityEffectors" type="Button" parent="HBoxContainer/VBoxContainer/ShowHideButtons" index="0"]
+layout_mode = 2
+toggle_mode = true
+text = "Show Effectors"
+
+[node name="VisibilityConditions" type="Button" parent="HBoxContainer/VBoxContainer/ShowHideButtons" index="1"]
+layout_mode = 2
+toggle_mode = true
+text = "Show Conditions"
+
+[node name="CondContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer" index="2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="add_cond" type="Button" parent="HBoxContainer/VBoxContainer/CondContainer" index="0"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Add Condition"
+
+[node name="cond_selector" type="OptionButton" parent="HBoxContainer/VBoxContainer/CondContainer" index="1"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="hide_cond_list" type="Button" parent="HBoxContainer/VBoxContainer/CondContainer" index="2"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Hide"
+
+[node name="EffectorContainner" type="VBoxContainer" parent="HBoxContainer/VBoxContainer" index="3"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Button" type="Button" parent="HBoxContainer/VBoxContainer/EffectorContainner" index="0"]
+layout_mode = 2
+text = "Add Effector"
+
+[node name="Effector" parent="HBoxContainer/VBoxContainer/EffectorContainner" index="1" instance=ExtResource("3_1pbiv")]
+layout_mode = 2
+
+[node name="Delete" parent="HBoxContainer" index="5"]
+size_flags_horizontal = 3
+
+[connection signal="toggled" from="HBoxContainer/VBoxContainer/ShowHideButtons/VisibilityEffectors" to="." method="_on_visibility_effectors_toggled"]
+[connection signal="toggled" from="HBoxContainer/VBoxContainer/ShowHideButtons/VisibilityConditions" to="." method="_on_visibility_conditions_toggled"]

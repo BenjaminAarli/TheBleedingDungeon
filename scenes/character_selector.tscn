@@ -1,0 +1,363 @@
+[gd_scene load_steps=12 format=3 uid="uid://btjr3dhe4cpbw"]
+
+[ext_resource type="Texture2D" uid="uid://vd2tplkbuulo" path="res://data/images/Clayton.png" id="1_k0weu"]
+[ext_resource type="Texture2D" uid="uid://dulquwsnceina" path="res://data/images/Lisa.png" id="2_ci57a"]
+[ext_resource type="Texture2D" uid="uid://dm8iskrx7o0bh" path="res://data/images/Harold.png" id="3_efu1v"]
+[ext_resource type="FontFile" uid="uid://bo0p8gowdwlu3" path="res://data/fonts/playfair-display/PlayfairDisplay-Regular.ttf" id="4_ic5ay"]
+
+[sub_resource type="GDScript" id="GDScript_a51jl"]
+script/source = "extends Node2D
+
+const GAMESCENE = preload(\"res://scenes/Game.tscn\")
+
+var character_names = []
+
+@onready var ui_details_textbox = %character_details
+@onready var ui_stat_textbox 	= %character_stats
+@onready var ui_stat_values 	= %character_values
+
+var character_details = [
+	\"The Prince: \\n\" \\
+	+ \"You are the hero of your small town after saving a family from a housefire.\" \\
+	+ \" Your fathers wealth has given you the ability to spend your time waiting for a moment \" \\
+	+ \"to save the day. When people started speaking of a missing girl, you knew this was your\" \\
+	+ \"moment to become the hero you've dreamt of. \" \\
+	+ \"\\n\\n\" \\
+	+ \"Begins with a rapier, leather armor and other supplies.\",
+	
+	\"The Mother: \\n\" \\
+	+ \"Your daugther went missing a few days ago and the guardsmen aren't searching \" \\
+	+ \"beyond city limits. You know she can't be in the city anymore, she would have been found \" \\
+	+ \"by now. You hear whispers at night blaming you for her being missing. People you used to \" \\
+	+ \"trust turn against you.  You can't wait anymore. She must be out there. \"
+	+ \"\\n\\n\" \\
+	+ \"Begins with knives, a mallet, cloth dress, children toys and scraps of food.\",
+	
+	\"The Begger: \\n\" \\
+	+ \"The winds flow through empty streets. Whispers of a kidnapper are spoken \" \\
+	+ \"with bated breaths. They are coming for you, innocent or not. The guardsmen, the \" \\
+	+ \"community, the whole damned kingdom will strike you down. You can't fight back but \" \\
+	+ \"you can find her. Prove your innocence, until then: consider yourself guilty.\"
+	+ \"\\n\\n\" \\
+	+ \"Begins with a nothing but a few scraps of food. Survival is key.\",
+	
+	\"The Liar: \\n\" \\
+	+ \"They tore you from your work. You need to return.\"
+]
+
+var character_stats = [
+	{	# Prince
+		\"Strenght\": 	7, 
+		\"Health\": 		4, 
+		\"Education\": 	8,
+		\"Wealth\": 		8,
+		\"Wisdom\": 		5,
+		\"Beast\": 		2,
+	}, 	
+	{	# Mother
+		\"Strenght\": 	4, 
+		\"Health\": 		8, 
+		\"Education\": 	5,
+		\"Wisdom\": 		10,
+		\"Beast\": 		4,
+	}, 	
+	{	# Begger
+		\"Strenght\": 	6, 
+		\"Health\": 		3, 
+		\"Education\": 	2,
+		\"Wisdom\": 		8,
+		\"Beast\": 		12, 
+	}, 	
+]
+
+func _ready():
+	ui_details_textbox.text = \"\"
+	ui_stat_values.text 	= \"\"
+	ui_stat_textbox.hide()
+	for btns in get_tree().get_nodes_in_group(\"btn_character_select\"):
+		btns = btns as Button
+		character_names.append(btns.name)
+		btns.pressed.connect(character_was_selected.bind(btns.name))
+	pass
+
+func character_was_selected(text):
+	ui_stat_textbox.show()
+	var character_index = character_names.find(text)
+	var character_name  = text
+	ui_details_textbox.text = character_details[character_index]
+	# Set stat names
+	var stat_text = \"\"
+	for index in len(character_stats[character_index]):
+		var stat = character_stats[character_index].keys()[index]
+		stat_text += str(stat)+ \"\\n\"
+	ui_stat_textbox.text = stat_text
+	# Set stat values
+	var stat_values = \"\"
+	for values in character_stats[character_index].values():
+		stat_values += str(values) + \"\\n\"
+	ui_stat_values.text = stat_values
+	
+	print(character_index, \": \", character_name)
+	pass
+
+func game_start():
+	
+	pass
+
+func _on_game_start_pressed():
+	game_start()
+	pass
+"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_il270"]
+bg_color = Color(0, 0, 0, 0)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7x5de"]
+bg_color = Color(0.486275, 0.486275, 0.486275, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hqmhl"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_54kh3"]
+bg_color = Color(0.0509804, 0.0509804, 0.0509804, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.282353, 0.282353, 0.282353, 1)
+border_blend = true
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e2tqb"]
+bg_color = Color(0.113725, 0.113725, 0.113725, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_blend = true
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eaxhi"]
+bg_color = Color(0.00784314, 0.00784314, 0.00784314, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.298039, 0.298039, 0.298039, 1)
+border_blend = true
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 4
+
+[node name="character_selector" type="Node2D"]
+script = SubResource("GDScript_a51jl")
+
+[node name="Control2" type="Control" parent="."]
+z_index = -100
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="ColorRect" type="ColorRect" parent="Control2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0784314, 0.0784314, 0.0784314, 1)
+metadata/_edit_lock_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+offset_left = 192.0
+offset_right = 1728.0
+offset_bottom = 640.0
+mouse_filter = 2
+metadata/_edit_group_ = true
+
+[node name="CenterContainer2" type="CenterContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="Control" type="Control" parent="HBoxContainer/CenterContainer2"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/CenterContainer2/Control"]
+layout_mode = 0
+offset_left = -193.0
+offset_top = -258.0
+offset_right = 233.0
+offset_bottom = 298.0
+mouse_filter = 2
+texture = ExtResource("1_k0weu")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Clayton" type="Button" parent="HBoxContainer/CenterContainer2/Control/TextureRect" groups=["btn_character_select"]]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -9.0
+offset_top = -10.0
+offset_right = 9.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_il270")
+theme_override_styles/hover = SubResource("StyleBoxFlat_7x5de")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_hqmhl")
+
+[node name="CenterContainer3" type="CenterContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="Control" type="Control" parent="HBoxContainer/CenterContainer3"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/CenterContainer3/Control"]
+layout_mode = 0
+offset_left = -193.0
+offset_top = -258.0
+offset_right = 233.0
+offset_bottom = 298.0
+mouse_filter = 2
+texture = ExtResource("2_ci57a")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Sandra" type="Button" parent="HBoxContainer/CenterContainer3/Control/TextureRect" groups=["btn_character_select"]]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -9.0
+offset_top = -10.0
+offset_right = 9.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_il270")
+theme_override_styles/hover = SubResource("StyleBoxFlat_7x5de")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_hqmhl")
+
+[node name="CenterContainer4" type="CenterContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="Control" type="Control" parent="HBoxContainer/CenterContainer4"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/CenterContainer4/Control"]
+layout_mode = 0
+offset_left = -193.0
+offset_top = -258.0
+offset_right = 233.0
+offset_bottom = 298.0
+mouse_filter = 2
+texture = ExtResource("3_efu1v")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Harold" type="Button" parent="HBoxContainer/CenterContainer4/Control/TextureRect" groups=["btn_character_select"]]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -9.0
+offset_top = -10.0
+offset_right = 9.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_il270")
+theme_override_styles/hover = SubResource("StyleBoxFlat_7x5de")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_hqmhl")
+
+[node name="character_details" type="RichTextLabel" parent="."]
+unique_name_in_owner = true
+offset_left = 256.0
+offset_top = 664.0
+offset_right = 1704.0
+offset_bottom = 1080.0
+theme_override_fonts/normal_font = ExtResource("4_ic5ay")
+theme_override_font_sizes/normal_font_size = 32
+text = "The Prince:
+You are the hero of your small town after saving a family from a housefire. Your fathers wealth has given you the ability to spend your time waiting for a moment to save the day. When people started speaking of a missing girl, you knew this was your moment to become the hero you've dreamt of. 
+
+Starts with a rapier, leather armor and "
+
+[node name="character_stats" type="RichTextLabel" parent="."]
+unique_name_in_owner = true
+offset_left = 1944.0
+offset_top = 720.0
+offset_right = 2176.0
+offset_bottom = 912.0
+theme_override_fonts/normal_font = ExtResource("4_ic5ay")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "Strength: 			
+Constitution: 
+Wisdom:				
+Horror: 				"
+fit_content = true
+scroll_active = false
+
+[node name="character_values" type="RichTextLabel" parent="."]
+unique_name_in_owner = true
+offset_left = 2184.0
+offset_top = 720.0
+offset_right = 2296.0
+offset_bottom = 912.0
+theme_override_fonts/normal_font = ExtResource("4_ic5ay")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "0
+6
+4
+16"
+fit_content = true
+scroll_active = false
+
+[node name="game_start" type="Button" parent="."]
+offset_left = 1600.0
+offset_top = 640.0
+offset_right = 1856.0
+offset_bottom = 672.0
+focus_mode = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_54kh3")
+theme_override_styles/hover = SubResource("StyleBoxFlat_e2tqb")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_eaxhi")
+text = " Begin"
+alignment = 0
+
+[connection signal="pressed" from="game_start" to="." method="_on_game_start_pressed"]

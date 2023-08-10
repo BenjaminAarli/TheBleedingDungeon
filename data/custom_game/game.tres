@@ -1,0 +1,190 @@
+[gd_resource type="Resource" script_class="Scripture" load_steps=27 format=3 uid="uid://d1gcrs5wqg45l"]
+
+[ext_resource type="Script" path="res://scripts/GD_Scripture.gd" id="1_vqqw0"]
+[ext_resource type="Script" path="res://scripts/resources/dialogue_cogs/cog_text.gd" id="2_44yf7"]
+[ext_resource type="Script" path="res://scripts/resources/dialogue_cogs/cog_branch.gd" id="3_kfwn5"]
+[ext_resource type="Script" path="res://scripts/resources/dialogue_cogs/cog_tree.gd" id="4_xoup2"]
+[ext_resource type="Script" path="res://scripts/resources/dialogue_cogs/cog_tree_end.gd" id="5_0g7jk"]
+
+[sub_resource type="Resource" id="Resource_d7oae"]
+script = ExtResource("2_44yf7")
+inside_tree = []
+inside_branch = []
+inside_check = []
+text = "1 The awaken to the sounds of passing engines and the buzzing of a lamp post. It's a quiet and dark evening, and you are lying in the cobblestone road. A puddle has formed around you and you are half-soaked in liquid. "
+
+[sub_resource type="Resource" id="Resource_r5g7g"]
+script = ExtResource("2_44yf7")
+inside_tree = []
+inside_branch = []
+inside_check = []
+text = "2 As you get both armes out beneath you, you pull your torso back and get out of the flakey mess beneath you.  "
+
+[sub_resource type="Resource" id="Resource_muqfn"]
+script = ExtResource("2_44yf7")
+inside_tree = []
+inside_branch = []
+inside_check = []
+text = "3 There is no one around. You see in a blurry haze the silhouette of a passing vehicle driving a head of you. With your arm reaching below you, into the puddle of chucky, cold mush you push yourself up a bit. "
+
+[sub_resource type="Resource" id="Resource_25l6g"]
+script = ExtResource("2_44yf7")
+inside_tree = []
+inside_branch = []
+inside_check = []
+text = "4 You don't recognize this place but it's not unfamiliar. The houses around are simple, lower middle class housing and the air is cool. You are probably north of Hemwick or in the middle of Salround. Whatever the case, you need to get home. "
+
+[sub_resource type="Resource" id="Resource_a3xgl"]
+script = ExtResource("2_44yf7")
+inside_tree = []
+inside_branch = []
+inside_check = []
+text = "5 You put your other arm out and reach for the ground. Your body isn't fully listening to the instructions you demand but it will do for now. "
+
+[sub_resource type="Resource" id="Resource_1mgwl"]
+script = ExtResource("2_44yf7")
+inside_tree = []
+inside_branch = []
+inside_check = []
+text = "6 \"Hey, you!\""
+
+[sub_resource type="Resource" id="Resource_68687"]
+script = ExtResource("2_44yf7")
+inside_tree = []
+inside_branch = []
+inside_check = []
+text = "7 What?... Who was that?..."
+
+[sub_resource type="Resource" id="Resource_uk8gt"]
+script = ExtResource("2_44yf7")
+inside_tree = []
+inside_branch = []
+inside_check = []
+text = "\"You should check the liquid out\""
+
+[sub_resource type="Resource" id="Resource_nt10d"]
+script = ExtResource("3_kfwn5")
+type = "branch"
+conditions = []
+hidden = false
+index = 10
+been_selected = false
+inside_tree = [8]
+inside_branch = [10]
+inside_check = []
+text = "Why would I do that?"
+
+[sub_resource type="Resource" id="Resource_eebo4"]
+script = ExtResource("3_kfwn5")
+type = "branch"
+conditions = []
+hidden = false
+index = 12
+been_selected = false
+inside_tree = [8]
+inside_branch = [12]
+inside_check = []
+text = "Who are you?"
+
+[sub_resource type="Resource" id="Resource_mkxrr"]
+script = ExtResource("3_kfwn5")
+type = "branch"
+conditions = []
+hidden = false
+index = 14
+been_selected = false
+inside_tree = [8]
+inside_branch = [14]
+inside_check = []
+text = "check out the liquid...mush. "
+
+[sub_resource type="Resource" id="Resource_xjtt7"]
+script = ExtResource("3_kfwn5")
+type = "branch"
+conditions = []
+hidden = false
+index = 16
+been_selected = false
+inside_tree = [8]
+inside_branch = [16]
+inside_check = []
+text = "check out the liquid...mush. HARDCORE"
+
+[sub_resource type="Resource" id="Resource_lqm4n"]
+script = ExtResource("3_kfwn5")
+type = "branch"
+conditions = []
+hidden = false
+index = 18
+been_selected = false
+inside_tree = [8]
+inside_branch = [18]
+inside_check = []
+text = "No, I know enough. [exit examination]"
+
+[sub_resource type="Resource" id="Resource_2mhfk"]
+script = ExtResource("4_xoup2")
+type = "tree"
+branches = [SubResource("Resource_nt10d"), SubResource("Resource_eebo4"), SubResource("Resource_mkxrr"), SubResource("Resource_xjtt7"), SubResource("Resource_lqm4n")]
+inside_tree = [8]
+inside_branch = []
+inside_check = []
+text = ""
+
+[sub_resource type="Resource" id="Resource_ch8q7"]
+script = ExtResource("2_44yf7")
+inside_tree = [8]
+inside_branch = [10]
+inside_check = []
+text = "\"Think about it. There is something beneath you. Something unknown. Knowning might present further options\""
+
+[sub_resource type="Resource" id="Resource_yi22s"]
+script = ExtResource("2_44yf7")
+inside_tree = [8]
+inside_branch = [12]
+inside_check = []
+text = "\"I am nothing, and I am you. You and I, we go way back but most importantly... I am your strange curiosity for the liquid mush beneath you.\""
+
+[sub_resource type="Resource" id="Resource_2q4kn"]
+script = ExtResource("2_44yf7")
+inside_tree = [8]
+inside_branch = [14]
+inside_check = []
+text = "You sit up and scrape it with your finger. It's cold, flakey and mushy. It's...
+
+...vomit. probably vomit. "
+
+[sub_resource type="Resource" id="Resource_xaace"]
+script = ExtResource("2_44yf7")
+inside_tree = [8]
+inside_branch = [16]
+inside_check = []
+text = "You sit up and scrape it with your finger. "
+
+[sub_resource type="Resource" id="Resource_qcb76"]
+script = ExtResource("2_44yf7")
+inside_tree = [8]
+inside_branch = [18]
+inside_check = []
+text = ""
+
+[sub_resource type="Resource" id="Resource_rbbsj"]
+script = ExtResource("5_0g7jk")
+inside_tree = []
+inside_branch = []
+inside_check = []
+text = "sharting penis clowns"
+
+[sub_resource type="Resource" id="Resource_8im6c"]
+script = ExtResource("2_44yf7")
+inside_tree = []
+inside_branch = []
+inside_check = []
+text = ""
+
+[resource]
+script = ExtResource("1_vqqw0")
+stories = {
+"chain16": [SubResource("Resource_d7oae"), SubResource("Resource_r5g7g"), SubResource("Resource_muqfn"), SubResource("Resource_25l6g"), SubResource("Resource_a3xgl"), SubResource("Resource_1mgwl"), SubResource("Resource_68687"), SubResource("Resource_uk8gt"), SubResource("Resource_2mhfk"), SubResource("Resource_nt10d"), SubResource("Resource_ch8q7"), SubResource("Resource_eebo4"), SubResource("Resource_yi22s"), SubResource("Resource_mkxrr"), SubResource("Resource_2q4kn"), SubResource("Resource_xjtt7"), SubResource("Resource_xaace"), SubResource("Resource_lqm4n"), SubResource("Resource_qcb76"), SubResource("Resource_rbbsj"), SubResource("Resource_8im6c")]
+}
+starting_story = "chain16"

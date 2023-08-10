@@ -1,0 +1,46 @@
+[gd_scene load_steps=3 format=3 uid="uid://dmjrw0028idle"]
+
+[ext_resource type="PackedScene" uid="uid://cu28ygupqy6hy" path="res://Editor/Dabs/Notes/dab_draggable.tscn" id="1_04ej2"]
+[ext_resource type="Script" path="res://Editor/Dabs/Scripts/dab_text.gd" id="2_oltws"]
+
+[node name="Dab_Text" instance=ExtResource("1_04ej2")]
+offset_bottom = 128.0
+focus_mode = 0
+script = ExtResource("2_oltws")
+
+[node name="HBoxContainer" parent="HBoxContainer/VBoxContainer" index="0"]
+size_flags_vertical = 6
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/HBoxContainer" index="0"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="speaker" type="LineEdit" parent="HBoxContainer/VBoxContainer/HBoxContainer/HBoxContainer2" index="0"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Speaker"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/HBoxContainer" index="1"]
+layout_mode = 2
+
+[node name="has_speaker" type="CheckButton" parent="HBoxContainer/VBoxContainer/HBoxContainer/HBoxContainer3" index="0"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "has speaker"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer/VBoxContainer" index="1"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="textbox" type="TextEdit" parent="HBoxContainer/VBoxContainer/HBoxContainer2" index="0"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Words of wisdom"
+scroll_fit_content_height = true
+
+[connection signal="text_changed" from="HBoxContainer/VBoxContainer/HBoxContainer/HBoxContainer2/speaker" to="." method="_on_speaker_text_changed"]
+[connection signal="toggled" from="HBoxContainer/VBoxContainer/HBoxContainer/HBoxContainer3/has_speaker" to="." method="_on_has_speaker_toggled"]
+[connection signal="text_changed" from="HBoxContainer/VBoxContainer/HBoxContainer2/textbox" to="." method="_on_textbox_text_changed"]

@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="GDScripture" load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/GD_Scripture.gd" id="1_fgoq6"]
+[ext_resource type="Script" path="res://scripts/GD_Chain.gd" id="2_lfhkc"]
+
+[sub_resource type="Resource" id="Resource_63opj"]
+script = ExtResource("2_lfhkc")
+
+[sub_resource type="Resource" id="Resource_ldn67"]
+script = ExtResource("2_lfhkc")
+
+[resource]
+script = ExtResource("1_fgoq6")
+stories = {
+"penis": SubResource("Resource_63opj"),
+"umph": SubResource("Resource_ldn67")
+}
+stats = {}

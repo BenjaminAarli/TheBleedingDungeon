@@ -1,0 +1,86 @@
+[gd_scene load_steps=5 format=3 uid="uid://cu28ygupqy6hy"]
+
+[ext_resource type="PackedScene" uid="uid://bn64sumg8of67" path="res://Editor/Dabs/Base/dab.tscn" id="1_6fue1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b70ml"]
+bg_color = Color(0.352941, 0, 0.00392157, 1)
+border_width_left = 1
+border_width_right = 1
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ct7c6"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_md4wd"]
+bg_color = Color(0.6, 0, 0.0980392, 1)
+
+[node name="Dab" instance=ExtResource("1_6fue1")]
+offset_bottom = 64.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." index="0"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="marker_left" type="Label" parent="HBoxContainer" index="0"]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+text = "III"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VSeparator2" type="VSeparator" parent="HBoxContainer" index="1"]
+custom_minimum_size = Vector2(8, 0)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer" index="2"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer" index="0"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VSeparator" type="VSeparator" parent="HBoxContainer" index="3"]
+custom_minimum_size = Vector2(8, 0)
+layout_mode = 2
+mouse_filter = 1
+
+[node name="marker_right" type="Label" parent="HBoxContainer" index="4"]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+text = "III"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Delete" type="Button" parent="HBoxContainer" index="5"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_b70ml")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ct7c6")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ct7c6")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_ct7c6")
+theme_override_styles/focus = SubResource("StyleBoxFlat_ct7c6")
+text = "x"
+
+[node name="DeleteProgress" type="ProgressBar" parent="HBoxContainer/Delete" index="0"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_md4wd")
+max_value = 2.0
+fill_mode = 3
+show_percentage = false

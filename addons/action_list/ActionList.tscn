@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://cqw5ftaslf4a1"]
+
+[ext_resource type="Script" path="res://addons/action_list v0.2/ActionList.gd" id="1_eholx"]
+
+[node name="ActionList" type="VBoxContainer"]
+anchors_preset = -1
+anchor_right = 0.167
+anchor_bottom = 0.296
+offset_right = -0.384018
+offset_bottom = 0.192001
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_eholx")

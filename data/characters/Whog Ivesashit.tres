@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="character_base" load_steps=4 format=3 uid="uid://cve7wacaowp1h"]
+
+[ext_resource type="Script" path="res://scripts/character_class.gd" id="1_tja8a"]
+[ext_resource type="Script" path="res://scripts/character_base.gd" id="2_b0so1"]
+
+[sub_resource type="Resource" id="Resource_62w4q"]
+script = ExtResource("1_tja8a")
+name = "Peasant"
+title = "The Peasant"
+description = "The Peasant: 
+A Low-life and a poor soul. Your skills are better served at"
+abilities = []
+
+[resource]
+script = ExtResource("2_b0so1")
+display_name = "Whog Ivesashit"
+player_name = "Farty Fartington"
+class_ = SubResource("Resource_62w4q")
+health = 5
+health_max = 5
+stats = {}
+inventory = {}

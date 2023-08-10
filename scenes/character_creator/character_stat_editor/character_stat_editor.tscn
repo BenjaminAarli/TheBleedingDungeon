@@ -1,0 +1,151 @@
+[gd_scene load_steps=3 format=3 uid="uid://glohfhbl6hny"]
+
+[ext_resource type="FontFile" uid="uid://bo0p8gowdwlu3" path="res://data/fonts/playfair-display/PlayfairDisplay-Regular.ttf" id="1_ldp6s"]
+
+[sub_resource type="GDScript" id="GDScript_qsul5"]
+script/source = "extends Node2D
+
+@onready var ui_stat 		= preload(\"res://character_creator/character_stat_editor/stat_value_setter.tscn\")
+@onready var ui_stat_holder = %stats
+@onready var ui_points_left = %ui_points_left
+
+var character = preload(\"res://characters/Whog Ivesashit.tres\")
+
+func _ready():
+	print(character.stats)
+	for index in len(character.stats):
+		# create statblock for editing.
+		var new_stat  = ui_stat.instantiate()
+		new_stat = new_stat as stat_value_setter
+		
+		var statname  = character.stats.keys()[index]
+		var statvalue = character.stats.values()[index]
+		
+		new_stat.name 		= statname
+		new_stat.min_value 	= statvalue
+		new_stat.set_statname(statname)
+		new_stat.set_value(statvalue)
+		
+		new_stat.plussed_value.connect(add_point)
+		new_stat.minused_value.connect(remove_point)
+		
+		ui_stat_holder.add_child(new_stat)
+		pass
+		
+	update_points_amount()
+
+func update_ui():
+	ui_points_left.text = str(character.stat_buy_points)
+	pass
+
+func update_points_amount():
+	for skill in get_tree().get_nodes_in_group(\"skill_setter\"):
+		skill.points_left = character.stat_buy_points
+	update_ui()
+	pass
+
+func add_point():
+	character.stat_buy_points -= 1
+	update_points_amount()
+	pass
+
+func remove_point():
+	character.stat_buy_points += 1
+	update_points_amount()
+	pass
+"
+
+[node name="character_stat_editor" type="Node2D"]
+script = SubResource("GDScript_qsul5")
+
+[node name="Control2" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="ColorRect" type="ColorRect" parent="Control2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0784314, 0.0784314, 0.0784314, 1)
+metadata/_edit_lock_ = true
+
+[node name="ColorRect2" type="ColorRect" parent="Control2"]
+layout_mode = 0
+offset_left = 120.0
+offset_top = 184.0
+offset_right = 616.0
+offset_bottom = 416.0
+color = Color(0.337255, 0.337255, 0.337255, 1)
+
+[node name="character_stats" type="RichTextLabel" parent="Control2"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_left = 128.0
+offset_top = 192.0
+offset_right = 360.0
+offset_bottom = 384.0
+theme_override_fonts/normal_font = ExtResource("1_ldp6s")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "Strength: 			
+Constitution: 
+Wisdom:				
+Horror: 				"
+fit_content = true
+scroll_active = false
+
+[node name="character_values" type="RichTextLabel" parent="Control2"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_left = 512.0
+offset_top = 192.0
+offset_right = 624.0
+offset_bottom = 384.0
+theme_override_fonts/normal_font = ExtResource("1_ldp6s")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "0
+6
+4
+16"
+fit_content = true
+scroll_active = false
+
+[node name="character_details" type="RichTextLabel" parent="Control2"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 256.0
+offset_top = 664.0
+offset_right = 1704.0
+offset_bottom = 1080.0
+theme_override_fonts/normal_font = ExtResource("1_ldp6s")
+theme_override_font_sizes/normal_font_size = 32
+text = "The Prince:
+You are the hero of your small town after saving a family from a housefire. Your fathers wealth has given you the ability to spend your time waiting for a moment to save the day. When people started speaking of a missing girl, you knew this was your moment to become the hero you've dreamt of. 
+
+Starts with a rapier, leather armor and "
+
+[node name="ui_points_left" type="Label" parent="Control2"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 480.0
+offset_top = 144.0
+offset_right = 584.0
+offset_bottom = 176.0
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="stats" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
+offset_left = 136.0
+offset_top = 192.0
+offset_right = 600.0
+offset_bottom = 408.0

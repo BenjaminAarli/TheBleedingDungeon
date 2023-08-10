@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bigs3b17hp285"]
+
+[ext_resource type="PackedScene" uid="uid://cu28ygupqy6hy" path="res://Editor/Dabs/Notes/dab_draggable.tscn" id="1_cp3ls"]
+[ext_resource type="Script" path="res://Editor/Dabs/Scripts/dab_tree_end.gd" id="2_raq8t"]
+
+[node name="Dab_Tree" instance=ExtResource("1_cp3ls")]
+script = ExtResource("2_raq8t")
+
+[node name="LineEdit" type="LineEdit" parent="HBoxContainer/VBoxContainer/HBoxContainer" index="0"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Tree END: Name"
+editable = false

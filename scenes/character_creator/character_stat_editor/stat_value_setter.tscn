@@ -1,0 +1,47 @@
+[gd_scene load_steps=3 format=3 uid="uid://cn5woqvcopebr"]
+
+[ext_resource type="Script" path="res://scenes/character_creator/character_stat_editor/stat_value_setter.gd" id="1_r634r"]
+[ext_resource type="FontFile" uid="uid://bo0p8gowdwlu3" path="res://data/fonts/playfair-display/PlayfairDisplay-Regular.ttf" id="2_7deko"]
+
+[node name="skill_setter" type="Control"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 464.0
+offset_bottom = 48.0
+script = ExtResource("1_r634r")
+
+[node name="stat_value" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 368.0
+offset_right = 424.0
+offset_bottom = 48.0
+theme_override_fonts/normal_font = ExtResource("2_7deko")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[center]0[/center]
+"
+fit_content = true
+scroll_active = false
+
+[node name="stat_name" type="Label" parent="."]
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 48.0
+theme_override_fonts/font = ExtResource("2_7deko")
+theme_override_font_sizes/font_size = 32
+text = "Strenght:"
+
+[node name="btn_plus" type="Button" parent="."]
+layout_mode = 0
+offset_left = 424.0
+offset_right = 464.0
+offset_bottom = 48.0
+text = ">"
+
+[node name="btn_minus" type="Button" parent="."]
+layout_mode = 0
+offset_left = 328.0
+offset_right = 368.0
+offset_bottom = 48.0
+text = "<"
