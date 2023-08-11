@@ -146,14 +146,13 @@ border_width_bottom = 2
 [sub_resource type="GDScript" id="GDScript_5fyuc"]
 script/source = "extends ImprovedItemList
 
+
 func _ready():
-	super()
 	item_added.connect(set_item_meta)
 	pass
 
-func set_item_meta(iname: String, index: int):
-	var data = GDRoom.new(iname)
-	set_item_metadata(index, data)
+func set_item_meta(iname: String):
+	var type = GDRoom.new()
 	pass
 "
 
@@ -532,7 +531,7 @@ item_4/text = "asdasdasd"
 [node name="Test" type="Control" parent="sections"]
 layout_mode = 2
 
-[node name="ImprovedItemList" type="ItemList" parent="sections/Test" node_paths=PackedStringArray("newItemName", "btnAdd", "btnRemoveSelected", "btnMoveSelectedUp", "btnMoveSelectedDown")]
+[node name="ImprovedItemList" type="ItemList" parent="sections/Test"]
 layout_mode = 0
 offset_left = 64.0
 offset_top = 97.0
@@ -540,15 +539,10 @@ offset_right = 448.0
 offset_bottom = 929.0
 select_mode = 1
 script = SubResource("GDScript_5fyuc")
-newItemName = NodePath("../LineEdit")
-btnAdd = NodePath("../+")
-btnRemoveSelected = NodePath("../-")
-btnMoveSelectedUp = NodePath("../up")
-btnMoveSelectedDown = NodePath("../down")
 
 [node name="+" type="Button" parent="sections/Test"]
 layout_mode = 0
-offset_left = 408.0
+offset_left = 384.0
 offset_top = 41.0
 offset_right = 448.0
 offset_bottom = 82.0
@@ -556,9 +550,9 @@ text = "+"
 
 [node name="-" type="Button" parent="sections/Test"]
 layout_mode = 0
-offset_left = 360.0
+offset_left = 320.0
 offset_top = 41.0
-offset_right = 400.0
+offset_right = 376.0
 offset_bottom = 82.0
 text = "-"
 
@@ -582,7 +576,7 @@ text = "Down"
 layout_mode = 0
 offset_left = 64.0
 offset_top = 41.0
-offset_right = 352.0
+offset_right = 312.0
 offset_bottom = 81.0
 
 [connection signal="pressed" from="Function Buttons/file" to="Function Buttons" method="_on_file_pressed"]

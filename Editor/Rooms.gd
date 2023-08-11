@@ -61,6 +61,17 @@ func list_selected(new_selected):
 	print(rooms_selected)
 	pass
 
+func get_data():
+	var data: Array[GDRoom] = []
+	for index in node_rooms.item_count:
+		var room_data = node_rooms.get_item_metadata(index)
+		data.append(room_data)
+	return data
+
+func unselect():
+	node_rooms.deselect_all()
+	pass
+
 func _ready():
 	btnAddRoom.button_down.connect(add_room)
 	btnRemoveRoom.button_down.connect(remove_room_selected.bind())
@@ -69,6 +80,7 @@ func _ready():
 	# VVV might be overkill but who cares.  VVV
 	node_rooms.item_selected.connect(list_selected)
 	node_rooms.multi_selected.connect(list_selected)
+	node_rooms.focus_exited.connect(unselect)
 	# 
 	add_room("1 Penisfort")
 	add_room("2 Bouncy Castle")
