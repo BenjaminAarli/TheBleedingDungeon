@@ -85,7 +85,7 @@ func next(_skip_to = null):
 func write(text: String):
 	var old_text  = textnode.get_parsed_text()
 	textnode.text = "[color=#666666]" + old_text + "[/color]"
-	textnode.text += text + "\n\n"
+	textnode.text += DialogueData.parse(text) + "\n\n"
 	pass
 
 # Write the text in the cog or do cog action and skip.

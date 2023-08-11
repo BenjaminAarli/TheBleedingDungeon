@@ -3,10 +3,9 @@ class_name BaseEditor
 
 var save_path = "res://data/custom_game/"
 var file_name = "gamefile.tres"
-var file: GDScripture
-#var temp: GDScripture
 
-var current_chain: GDChain
+var file			: GDScripture
+var current_chain	: GDChain
 
 # nodes
 @onready var label_current_chain: Label = %curChain
@@ -16,9 +15,21 @@ var current_chain: GDChain
 @onready var DabEditor = %DabEditor
 @onready var DabCont: Dabs = %Dabs
 
+func update_data(filedata: GDScripture):
+	# starting chain setup
+	var old_index = startChain.get_selected_id()
+	var old_text  = startChain.get_item_text(old_index)
+	startChain.clear()
+	for chain in filedata.get_chains():
+		startChain.add_item(chain)
+	startChain.select(old_index)
+	# end
+	pass
+
 func _ready():
 	if not load_scripture():
 		new_scripture()
+		file.updated.connect(update_data.bind(file))
 	pass
 
 func update_ui():
