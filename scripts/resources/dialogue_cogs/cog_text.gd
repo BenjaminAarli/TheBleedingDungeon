@@ -12,3 +12,7 @@ func turn():
 func read():
 	return text
 
+func _init(_text: String = ""):
+	if _text != "":
+		text = _text
+	pass

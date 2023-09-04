@@ -8,72 +8,20 @@
         "type": "tabs",
         "children": [
           {
-            "id": "48f2f3492f54e189",
+            "id": "d6903762d8738e57",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Organisations/Sect of the machine/Flesh of the Machine.md",
-                "mode": "source",
-                "source": false
-              }
+              "type": "empty",
+              "state": {}
             }
           },
           {
-            "id": "2ddef74f23baeab8",
+            "id": "5bbba3e2ac9bacbb",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Organisations/Workers/Worker Class.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "bfae2201c37b5193",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Organisations/Sect of the machine/Flesh of the Machine.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "923111da45210fec",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Organisations/Sect of the machine/Blood of the Machine.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "97c1de029236bb3e",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Organisations/Sect of the machine/Voice of the Machine.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "ee2cbd011b31a546",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "The Machine.md",
+                "file": "Game.md",
                 "mode": "source",
                 "source": false
               }
@@ -146,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Organisations/Workers/Worker Class.md",
+                "file": "Game.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -163,7 +111,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Organisations/Workers/Worker Class.md",
+                "file": "Game.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -186,7 +134,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Organisations/Workers/Worker Class.md"
+                "file": "Game.md"
               }
             }
           }
@@ -209,25 +157,28 @@
   },
   "active": "52cbcf46bc075d9b",
   "lastOpenFiles": [
-    "Organisations/Workers",
-    "The Machine.md",
-    "Organisations/Workers/Worker Class.md",
+    "Natural",
+    "Religious",
+    "Game.md",
     "Sect of the Machine.md",
+    "Player.md",
     "Machine Hierarchy.md",
+    "Game.md",
+    "2023-06-23.md",
+    "The Machine.md",
+    "Organisations/Workers",
+    "Organisations/Workers/Worker Class.md",
     "Organisations/Archives of knowledge/The Archives.md",
     "Organisations/Sect of the machine/Flesh of the Machine.md",
     "Organisations/Sect of the machine/Corpse of the Machine.md",
     "Organisations/Sect of the machine/Voice of the Machine.md",
     "Organisations/Sect of the machine/Blood of the Machine.md",
-    "Game.md",
-    "Player.md",
     "Quests/Business to come..md",
     "Organisations/Archives of knowledge",
     "Organisations",
     "Organisations/Sect of the machine",
     "Stats/Endurance.md",
     "Stats/Mask.md",
-    "2023-06-23.md",
     "Stats/Flesh.md",
     "Stats/Logic.md",
     "Stats/Power.md",

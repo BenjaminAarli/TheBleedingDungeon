@@ -1,1 +1,0 @@
-This sector is in control and command of the constructions the machine inhabits, the support structures and construction of new constructions. They are also required to maintain older constructs but this is often overlooked. 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dl5ro3t7tu6hh"]
+[gd_scene load_steps=17 format=3 uid="uid://dl5ro3t7tu6hh"]
 
 [ext_resource type="Script" path="res://Editor/Editor.gd" id="1_61o5i"]
 [ext_resource type="Script" path="res://Editor/ED_sections.gd" id="3_1o8qr"]
@@ -10,7 +10,7 @@
 [ext_resource type="Script" path="res://Editor/ED_NPCs.gd" id="5_yebxt"]
 [ext_resource type="Script" path="res://Editor/ED_Rooms.gd" id="6_nqlhc"]
 [ext_resource type="Script" path="res://scripts/nodes/Node_ImprovedItemList.gd" id="6_ri7lo"]
-[ext_resource type="Script" path="res://LSTChain.gd" id="10_idcuf"]
+[ext_resource type="Script" path="res://Editor/ED_Dialogue.gd" id="7_qxakm"]
 
 [sub_resource type="GDScript" id="GDScript_5bu84"]
 script/source = "extends Control
@@ -78,10 +78,26 @@ border_width_top = 1
 border_width_right = 1
 border_width_bottom = 2
 
+[sub_resource type="GDScript" id="GDScript_5fyuc"]
+script/source = "extends ImprovedItemList
+
+func _ready():
+	super()
+	item_added.connect(attach_metadata)
+	item_clicked.connect(check_metadata.bind())
+	pass
+
+func attach_metadata(index: int, data):
+	set_item_metadata(index, data)
+	pass
+
+func check_metadata(index: int, at_position: Vector2, mouse_button_index: int ):
+	print(get_item_metadata(index))
+	pass
+"
+
 [sub_resource type="GDScript" id="GDScript_33it7"]
 script/source = "extends Control
-
-signal save_chain(chain)
 
 const DAB_Base 			= preload(\"res://Editor/Dabs/Notes/dab_draggable.tscn\")
 const DAB_Text 			= preload(\"res://Editor/Dabs/Notes/dab_text.tscn\")
@@ -91,20 +107,16 @@ const DAB_Branch 		= preload(\"res://Editor/Dabs/Notes/dab_branch.tscn\")
 const DAB_Branch_edit 	= preload(\"res://Editor/Dabs/Notes/dab_branch_edit.tscn\")
 
 @export var dabs: Dabs
-var chain: GDChain
 
-func load_chain(_chain: GDChain):
-	print(\"loading chain: \", _chain)
-	# save chain before switching
-	if chain: chain.cogs = dabs.get_cogs()
-	chain = _chain
+func load_chain(chain: GDChain):
 	# remove all cogs
 	dabs.clear()
 	# add new cogs
-	dabs.set_chain(chain)
+	for cog in chain.cogs:
+		add_cog(cog)
 	pass
 
-func add_cog(cog: cog_base):
+func add_cog(cog):
 	match cog:
 		cog_text:
 			add(DAB_Text)
@@ -235,7 +247,6 @@ script = ExtResource("3_1o8qr")
 
 [node name="File" type="Control" parent="sections"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
 script = ExtResource("4_m1ctd")
 
@@ -426,18 +437,19 @@ offset_bottom = 728.0
 
 [node name="Chains" type="Control" parent="sections"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 script = ExtResource("5_rpd8b")
 
-[node name="LSTChain" type="ItemList" parent="sections/Chains" node_paths=PackedStringArray("newItemName", "btnAdd", "btnRemoveSelected", "btnMoveSelectedUp", "btnMoveSelectedDown")]
+[node name="LstChains" type="ItemList" parent="sections/Chains" node_paths=PackedStringArray("newItemName", "btnAdd", "btnRemoveSelected", "btnMoveSelectedUp", "btnMoveSelectedDown")]
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 64.0
 offset_top = 97.0
-offset_right = 384.0
+offset_right = 448.0
 offset_bottom = 929.0
 select_mode = 1
-script = ExtResource("10_idcuf")
+script = SubResource("GDScript_5fyuc")
 newItemName = NodePath("../LineEdit")
 btnAdd = NodePath("../+")
 btnRemoveSelected = NodePath("../-")
@@ -446,33 +458,33 @@ btnMoveSelectedDown = NodePath("../down")
 
 [node name="+" type="Button" parent="sections/Chains"]
 layout_mode = 0
-offset_left = 400.0
+offset_left = 408.0
 offset_top = 41.0
-offset_right = 464.0
+offset_right = 448.0
 offset_bottom = 82.0
 text = "+"
 
 [node name="-" type="Button" parent="sections/Chains"]
 layout_mode = 0
-offset_left = 16.0
-offset_top = 97.0
-offset_right = 56.0
-offset_bottom = 138.0
+offset_left = 360.0
+offset_top = 41.0
+offset_right = 400.0
+offset_bottom = 82.0
 text = "-"
 
 [node name="up" type="Button" parent="sections/Chains"]
 layout_mode = 0
-offset_left = 400.0
+offset_left = 456.0
 offset_top = 97.0
-offset_right = 464.0
+offset_right = 520.0
 offset_bottom = 138.0
 text = "Up"
 
 [node name="down" type="Button" parent="sections/Chains"]
 layout_mode = 0
-offset_left = 400.0
+offset_left = 456.0
 offset_top = 153.0
-offset_right = 464.0
+offset_right = 520.0
 offset_bottom = 194.0
 text = "Down"
 
@@ -480,10 +492,16 @@ text = "Down"
 layout_mode = 0
 offset_left = 64.0
 offset_top = 41.0
-offset_right = 384.0
+offset_right = 352.0
 offset_bottom = 81.0
 
-[node name="DabEditor" type="Control" parent="sections/Chains" node_paths=PackedStringArray("dabs")]
+[node name="Dialogue" type="Control" parent="sections"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+script = ExtResource("7_qxakm")
+
+[node name="DabEditor" type="Control" parent="sections/Dialogue" node_paths=PackedStringArray("dabs")]
 unique_name_in_owner = true
 layout_mode = 3
 anchors_preset = 0
@@ -495,7 +513,7 @@ script = SubResource("GDScript_33it7")
 dabs = NodePath("Dabs")
 metadata/_edit_group_ = true
 
-[node name="Dabs" parent="sections/Chains/DabEditor" instance=ExtResource("3_m70hj")]
+[node name="Dabs" parent="sections/Dialogue/DabEditor" instance=ExtResource("3_m70hj")]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 0
@@ -508,7 +526,7 @@ offset_bottom = 928.0
 grow_horizontal = 1
 grow_vertical = 1
 
-[node name="add_base" type="Button" parent="sections/Chains/DabEditor"]
+[node name="add_base" type="Button" parent="sections/Dialogue/DabEditor"]
 layout_mode = 0
 offset_left = 600.0
 offset_top = 64.0
@@ -516,7 +534,7 @@ offset_right = 704.0
 offset_bottom = 80.0
 text = "Base"
 
-[node name="add_text" type="Button" parent="sections/Chains/DabEditor"]
+[node name="add_text" type="Button" parent="sections/Dialogue/DabEditor"]
 layout_mode = 0
 offset_left = 600.0
 offset_top = 104.0
@@ -524,7 +542,7 @@ offset_right = 704.0
 offset_bottom = 135.0
 text = "Text"
 
-[node name="add_tree" type="Button" parent="sections/Chains/DabEditor"]
+[node name="add_tree" type="Button" parent="sections/Dialogue/DabEditor"]
 layout_mode = 0
 offset_left = 600.0
 offset_top = 144.0
@@ -532,7 +550,7 @@ offset_right = 704.0
 offset_bottom = 176.0
 text = "Tree"
 
-[node name="add_branch" type="Button" parent="sections/Chains/DabEditor"]
+[node name="add_branch" type="Button" parent="sections/Dialogue/DabEditor"]
 layout_mode = 0
 offset_left = 600.0
 offset_top = 184.0
@@ -540,7 +558,7 @@ offset_right = 704.0
 offset_bottom = 216.0
 text = "Branch"
 
-[node name="add_tree_end" type="Button" parent="sections/Chains/DabEditor"]
+[node name="add_tree_end" type="Button" parent="sections/Dialogue/DabEditor"]
 layout_mode = 0
 offset_left = 600.0
 offset_top = 224.0
@@ -548,7 +566,7 @@ offset_right = 704.0
 offset_bottom = 256.0
 text = "Tree - END"
 
-[node name="add_tree_edit" type="Button" parent="sections/Chains/DabEditor"]
+[node name="add_tree_edit" type="Button" parent="sections/Dialogue/DabEditor"]
 visible = false
 layout_mode = 0
 offset_left = 728.0
@@ -558,7 +576,7 @@ offset_bottom = 296.0
 text = "Edit TREE"
 alignment = 0
 
-[node name="add_branch_edit" type="Button" parent="sections/Chains/DabEditor"]
+[node name="add_branch_edit" type="Button" parent="sections/Dialogue/DabEditor"]
 visible = false
 layout_mode = 0
 offset_left = 600.0
@@ -568,6 +586,14 @@ offset_bottom = 296.0
 text = "Edit BRANCH"
 alignment = 0
 
+[node name="lst_chains" type="ItemList" parent="sections/Dialogue"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 56.0
+offset_top = 25.0
+offset_right = 192.0
+offset_bottom = 929.0
+
 [connection signal="pressed" from="Function Buttons/file" to="Function Buttons" method="_on_file_pressed"]
 [connection signal="pressed" from="Function Buttons/load" to="Function Buttons" method="_on_load_pressed"]
 [connection signal="pressed" from="Function Buttons/save" to="Function Buttons" method="_on_save_pressed"]
@@ -576,11 +602,12 @@ alignment = 0
 [connection signal="file_updated" from="sections/File" to="sections/File" method="_on_file_updated"]
 [connection signal="section_updated" from="sections/Player" to="." method="_on_player_section_updated"]
 [connection signal="section_updated" from="sections/Rooms" to="." method="_on_rooms_section_updated"]
-[connection signal="item_activated" from="sections/Chains/LSTChain" to="sections/Chains" method="_on_lst_chain_item_activated"]
-[connection signal="pressed" from="sections/Chains/DabEditor/add_base" to="sections/Chains/DabEditor" method="_on_add_base_pressed"]
-[connection signal="pressed" from="sections/Chains/DabEditor/add_text" to="sections/Chains/DabEditor" method="_on_add_text_pressed"]
-[connection signal="pressed" from="sections/Chains/DabEditor/add_tree" to="sections/Chains/DabEditor" method="_on_add_tree_pressed"]
-[connection signal="pressed" from="sections/Chains/DabEditor/add_branch" to="sections/Chains/DabEditor" method="_on_add_branch_pressed"]
-[connection signal="pressed" from="sections/Chains/DabEditor/add_tree_end" to="sections/Chains/DabEditor" method="_on_add_tree_end_pressed"]
-[connection signal="pressed" from="sections/Chains/DabEditor/add_tree_edit" to="sections/Chains/DabEditor" method="_on_add_tree_edit_pressed"]
-[connection signal="pressed" from="sections/Chains/DabEditor/add_branch_edit" to="sections/Chains/DabEditor" method="_on_add_branch_edit_pressed"]
+[connection signal="section_updated" from="sections/Dialogue" to="." method="_on_dialogue_section_updated"]
+[connection signal="pressed" from="sections/Dialogue/DabEditor/add_base" to="sections/Dialogue/DabEditor" method="_on_add_base_pressed"]
+[connection signal="pressed" from="sections/Dialogue/DabEditor/add_text" to="sections/Dialogue/DabEditor" method="_on_add_text_pressed"]
+[connection signal="pressed" from="sections/Dialogue/DabEditor/add_tree" to="sections/Dialogue/DabEditor" method="_on_add_tree_pressed"]
+[connection signal="pressed" from="sections/Dialogue/DabEditor/add_branch" to="sections/Dialogue/DabEditor" method="_on_add_branch_pressed"]
+[connection signal="pressed" from="sections/Dialogue/DabEditor/add_tree_end" to="sections/Dialogue/DabEditor" method="_on_add_tree_end_pressed"]
+[connection signal="pressed" from="sections/Dialogue/DabEditor/add_tree_edit" to="sections/Dialogue/DabEditor" method="_on_add_tree_edit_pressed"]
+[connection signal="pressed" from="sections/Dialogue/DabEditor/add_branch_edit" to="sections/Dialogue/DabEditor" method="_on_add_branch_edit_pressed"]
+[connection signal="item_activated" from="sections/Dialogue/lst_chains" to="sections/Dialogue" method="_on_lst_chains_item_activated"]

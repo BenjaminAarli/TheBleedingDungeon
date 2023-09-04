@@ -12,6 +12,9 @@ var status: statuses = statuses.UNKNOWN
 # BOTCHED 	are quests you have (for now) fucked up. You can always fix this somehow. 
 # FAILED 	are quests that have failed completely and are uncompletable. 
 
+var name = ""
+var desc = ""
+
 var is_compeleted	: bool = false # first:  when completed, all else is ignored. 
 var is_failed		: bool = false # second: when failed,    all else is ignored except 1st.
 var is_botched		: bool = false # third:  when botched,   all else is ignored except 1st and 2nd.
@@ -34,4 +37,8 @@ func get_status():
 		return statuses.BOTCHED
 	else:
 		return status
+
+func _init(quest_name: String, quest_desc: String):
+	name = quest_name
+	desc = quest_desc
 	pass

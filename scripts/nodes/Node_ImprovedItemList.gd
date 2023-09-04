@@ -1,9 +1,9 @@
 extends ItemList
 class_name ImprovedItemList
 
-signal item_added(iname: String, index: int)
-signal item_removed(iname: String, index: int)
-signal item_moved(iname: String, old_position: int, new_position: int)
+signal item_added(itemname: String)
+signal item_removed
+signal item_moved
 
 # Add/Remove
 @export var newItemName			: LineEdit
@@ -12,20 +12,17 @@ signal item_moved(iname: String, old_position: int, new_position: int)
 @export var btnMoveSelectedUp 	: Button
 @export var btnMoveSelectedDown	: Button
 
-func add_new_item(rname: String = ""):
-	if not rname: rname = newItemName.text
-	if rname:
-		add_item(rname)
+func on_add_item() -> int:
+	emit_signal("item_added", newItemName.text)
 	newItemName.text = ""
-	item_added.emit(rname, item_count)
-	pass
+	return 0
 
 func remove_item_selected():
 	var srooms = get_selected_items()
 	for room in srooms:
 		var roomname = get_item_text(room)
 		remove_item(room)
-		item_removed.emit(roomname, room)
+		emit_signal("item_removed")
 	pass
 
 func move_item_up():
@@ -34,7 +31,7 @@ func move_item_up():
 	for room in srooms:
 		var roomname = get_item_text(room)
 		move_item(room, room - 1)
-		item_moved.emit(roomname, room, room - 1)
+		item_moved.emit()
 	pass
 
 func move_item_down():
@@ -44,7 +41,7 @@ func move_item_down():
 	for room in srooms:
 		var roomname = get_item_text(room)
 		move_item(room, room + 1)
-		item_moved.emit(roomname, room, room + 1)
+		item_moved.emit()
 	pass
 
 func get_data():
@@ -55,15 +52,8 @@ func get_data():
 	return data
 
 func _ready():
-	btnAdd.button_down.connect(add_new_item)
+	btnAdd.button_down.connect(on_add_item)
 	btnRemoveSelected.button_down.connect(remove_item_selected)
 	btnMoveSelectedDown.button_down.connect(move_item_down)
 	btnMoveSelectedUp.button_down.connect(move_item_up)
-	add_new_item("1 Penisfort")
-	add_new_item("2 Bouncy Castle")
-	add_new_item("3 Fortress of doom")
-	add_new_item("4 Piece of shit")
-	add_new_item("5 Self made man")
-	add_new_item("6 GHost fever dick sucking")
-	add_new_item("7 Nobody cares anymore")
 	pass

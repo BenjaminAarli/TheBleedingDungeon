@@ -1,0 +1,2 @@
+extends GDCunt
+class_name GDConditions

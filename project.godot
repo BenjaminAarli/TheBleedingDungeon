@@ -12,14 +12,13 @@ config_version=5
 
 config/name="The Dungeon Bleeds"
 config/tags=PackedStringArray("dev", "working")
-run/main_scene="res://Editor/Editor.tscn"
+run/main_scene="res://scenes/MainMenutscn.tscn"
 config/features=PackedStringArray("4.1")
 
 [autoload]
 
 Filehandler="*res://scripts/GD_FileHandler.gd"
 Data="*res://scripts/data.gd"
-Player="*res://scripts/GD_Player.gd"
 ScriptureGenerator="*res://scripts/ScriptureGenerator.gd"
 DialogueData="*res://scripts/GD_DialogueData.gd"
 

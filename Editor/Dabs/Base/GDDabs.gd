@@ -11,6 +11,13 @@ var held_dab: Dab = null
 var over_dab: Dab = null
 var something_over = false
 
+const DAB_Base 			= preload("res://Editor/Dabs/Notes/dab_draggable.tscn")
+const DAB_Text 			= preload("res://Editor/Dabs/Notes/dab_text.tscn")
+const DAB_Tree 			= preload("res://Editor/Dabs/Notes/dab_tree.tscn")
+const DAB_Tree_end 		= preload("res://Editor/Dabs/Notes/dab_tree_end.tscn")
+const DAB_Branch 		= preload("res://Editor/Dabs/Notes/dab_branch.tscn")
+const DAB_Branch_edit 	= preload("res://Editor/Dabs/Notes/dab_branch_edit.tscn")
+
 func _ready():
 	list 		= find_child("list")
 	ui 			= find_child("ui")
@@ -102,8 +109,25 @@ func check_signals(dab):
 		dab.is_moving.connect(		dab_is_moving.bind(dab)	)
 		dab.is_idle.connect(		dab_is_idle.bind(dab)	)
 		dab.on_death.connect(		dabs_updated.bind()		)
-	print(dab)
 	return dab
+
+func add_cog(cog: cog_base):
+	match cog:
+		cog_text:
+			add(DAB_Text)
+		cog_tree:
+			add(DAB_Tree)
+		cog_tree_end:
+			add(DAB_Tree_end)
+		cog_branch:
+			add(DAB_Branch)
+		_:
+			add(DAB_Base)
+	pass
+
+func add(dab: PackedScene):
+	add_dab(dab.instantiate())
+	pass
 
 func add_dab(dab):
 	dab = check_signals(dab)
@@ -117,16 +141,26 @@ func remove_dab(dab: Dab):
 	pass
 
 func clear():
-	print("Start:\n\n")
 	for dab in list.get_children():
 		dab.queue_free()
 	pass
 
+func set_chain(chain: GDChain):
+	for cog in chain.cogs:
+		add_cog(cog)
+	pass
+
 func get_dabs():
-	return list.get_children()
+	return list.get_children() if list.get_child_count() > 0 else []
 
 func get_cogs():
-	pass
+	var cogs = []
+	for cog in get_dabs():
+		if cog.has_method("get_cog"):
+			cogs.append(cog.get_cog())
+		else:
+			print(cog, " does not have function get_cog so no cog was given.")
+	return cogs
 
 func _physics_process(delta):
 	if held_dab and over_dab:

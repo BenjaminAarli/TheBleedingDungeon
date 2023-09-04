@@ -5,53 +5,64 @@ class_name GDScripture
 
 signal updated
 
-@export var chains: Array[GDChain] = []
-@export var starting_chain: GDChain
+# Lists of things.
+var chains		:= GDChains.new()
+var quests 		:= GDQuests.new()
+var spells  	:= GDSpells.new()
+var deities		:= GDDeities.new()
+var rooms		:= GDRooms.new()
+var conditions 	:= GDConditions.new()
+var npcs 		:= GDNPCs.new()
 
-var players: Array[Player] = []
+var player		: GDPlayer	= null # This is kept as a player initator. 
+var start		: GDRoom 	= null # This is the room that starts the file.
 
-# Players
+# For easier saving, the player(s) are kept in the game file when saving. 
+var players		:= GDPlayers.new() 
 
-func get_player(index: int = 0):
-	return players[index]
+# Start Chain Functions #
 
-func get_players():
-	return players
-
-## Story functions
-
-func set_starting_chain(chain: GDChain):
-	starting_chain = chain
-	updated.emit()
+func set_start(room: GDRoom):
+	start = room
 	pass
 
-func get_starting_chain():
-	if not starting_chain:
-		print("Could not find starting chain in GDScripture, instead using first one I find.")
-		return chains.front()
-	else:
-		return starting_chain
+# ADDers
+
+func add_player(player: GDPlayer):
+	players.add_item(player)
+	pass
 
 func add_chain(sname: String):
-	var new_chain = GDChain.new(sname)
-	chains.append(new_chain)
-	updated.emit()
-	return sname
+	chains.add_item(sname)
+	pass
 
-func remove_chain(sname: String):
-	var result = chains.find(sname)
-	chains.remove_at(result)
-	updated.emit()
-	return result
+func add_quest(quest: GDQuest):
+	quests.add_item(quest)
+	pass
 
-func get_chain_using_text(sname: String):
-	return chains[chains.find(sname)]
+func add_room(room: GDRoom):
+	rooms.add_item(room)
+	pass
 
-func get_chain_using_index(index: int):
-	return chains[index]
+func add_condition(cond: GDCondition):
+	conditions.add_item(cond)
+	pass
 
-func get_chain_index_using_text(sname: String):
-	return chains.find(sname)
+func add_god(god: GDDeity):
+	deities.add_item(god)
+	pass
+
+# get individual
+
+func get_start(): 
+	return start
+func get_player(index: int = 0):
+	return players.get_item(index)
+
+# get all
+
+func get_players():
+	return players.get_items()
 
 func get_chains():
-	return chains
+	return chains.get_items()

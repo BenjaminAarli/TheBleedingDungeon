@@ -1,18 +1,21 @@
-extends Resource
+extends GDFlesh
 class_name GDNPC
 
-enum statuses 	{ALIVE, DEAD, AGGRESIVE}
-enum races 		{HUMAN, RAT, ORC, ELF, DWARF, OGRE}
-enum rank 		{SLAVE, PEASANT, COMMONEER, NOBLE, CLERGY}
+enum statuses 	{ALIVE, DEAD, AGGRESIVE, IDLE}
+enum races 		{HUMAN, RAT, ORC, ELF, DWARF, OGRE, OBJECT}
+enum ranks 		{SLAVE, PEASANT, COMMONEER, NOBLE, CLERGY}
+enum genders 	{MALE, FEMALE, NONE, OTHER}
 
-var fname = "penis"
-var lname = "PorkFace"
-var nname = "The Slurper"
+var fname = "Penis"			# first name
+var lname = "Porker"		# last name
+var nname = "The Slurper" 	# nickname
+var description = "They have a massive penis."
 
-var state	: statuses 	= statuses.ALIVE
+var status	: statuses 	= statuses.ALIVE
 var race	: races 	= races.HUMAN
+var rank 	: ranks 	= ranks.COMMONEER
+var gender 	: genders 	= genders.NONE
 
-var is_dead  	= false
 var is_known 	= false
 var is_missing 	= false
 
@@ -22,7 +25,7 @@ func get_status():
 	if is_dead:
 		return statuses.DEAD
 	else:
-		return state
+		return status
 
 func set_dead(boolean: bool):
 	is_dead = boolean
@@ -34,4 +37,18 @@ func die():
 
 func ressurect():
 	is_dead = false
+	pass
+
+func _init(firstname: String, lastname: String, nickname: String, 
+	ini_desc: String, ini_gender: genders, ini_race: races, 
+	ini_status: statuses, ini_rank: ranks):
+	
+	fname = firstname
+	lname = lastname
+	nname = nickname
+	description = ini_desc
+	gender 		= ini_gender
+	race 		= ini_race
+	rank 		= ini_rank
+	status 		= ini_status
 	pass

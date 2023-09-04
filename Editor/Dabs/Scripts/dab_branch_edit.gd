@@ -45,12 +45,11 @@ func get_conditions():
 	return conds
 
 func get_branch():
-	
 	# write later.
 	pass
 
 func get_cog():
-	var data = cog_branch_edit.new()
+	var data := cog_branch_edit.new()
 	data.visible = get_visiblility()
 	data.branch = get_branch()
 	return data

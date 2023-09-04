@@ -23,7 +23,7 @@ func set_data(cog: cog_text):
 	pass
 
 func get_cog():
-	var cog: cog_text = cog_text.new()
+	var cog := cog_text.new()
 	cog.text 	= text
 	cog.speaker = speaker
 	return cog

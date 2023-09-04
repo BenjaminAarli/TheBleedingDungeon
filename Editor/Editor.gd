@@ -4,95 +4,48 @@ class_name BaseEditor
 var save_path = "res://data/custom_game/"
 var file_name = "gamefile.tres"
 
-var file			: GDScripture
-var current_chain	: GDChain
+var file	: GDScripture	= GDScripture.new()
+var player	: GDPlayer  	= GDPlayer.new()
 
-# nodes
-@onready var label_current_chain: Label = %curChain
-@onready var lstChain	: ItemList 		= %LstChain
-@onready var startChain	: OptionButton 	= %startChain
-
-@onready var DabEditor = %DabEditor
-@onready var DabCont: Dabs = %Dabs
-
-func update_data(filedata: GDScripture):
-	# starting chain setup
-	var old_index = startChain.get_selected_id()
-	var old_text  = startChain.get_item_text(old_index)
-	startChain.clear()
-	for chain in filedata.get_chains():
-		startChain.add_item(chain)
-	startChain.select(old_index)
-	# end
-	pass
+# Sections
+@onready var sections: EDSections = %sections
 
 func _ready():
-	if not load_scripture():
-		new_scripture()
-		file.updated.connect(update_data.bind(file))
+	# If not file is saved, use new file.
+	if not set_file(load_file()):
+		set_file(file)
 	pass
 
-func update_ui():
-	update_chains()
+func set_file(sfile: GDScripture):
+	if sfile:
+		sections.set_file(sfile)
+		return true
+	else:
+		return false
+func load_file(): return ResourceLoader.load(save_path + file_name)
+func save_file(file: GDScripture): ResourceSaver.save(file, save_path + file_name, 0)
 
-# Save/Load File
-
-func load_scripture():
-	file = Filehandler.load_file(save_path + file_name)
-	file.updated.connect(update_ui.bind())
-	update_ui()
-	return file
-
-func save_scripture():
-	Filehandler.save_file(file, save_path + file_name)
+# steps to create a scripture
+	# 1 - Create the File. 
+	# 2 - Create the Player.
+	# 3 - Add Player to File.
+	# 4 - Create and Add the NPCs
+	# 5 - Create and Add the Chains
+	# 6 - Create and Add the Rooms
+	# 7 - Set Start of Game. (Room)
+	# 8 - Add Characters to Rooms
+	# 9 - Create and Add Cogs to Chains.
+	#10 - Play The Game using File.
+func generate_file():
+	# zzz # 
 	pass
 
-# chain stuff
-
-func load_chain_into_editor(index: int):
-	var chain: GDChain = file.get_chain_using_index(index)
-	print(chain)
-	DabEditor.load_chain(chain)
+func _on_player_section_updated(data: GDPlayer):
+	player = data
 	pass
 
-# New File
-
-func new_scripture():
-	file = GDScripture.new()
-	file.updated.connect(update_ui.bind())
-	update_ui()
+func _on_rooms_section_updated(data: GDRooms):
 	pass
 
-# update
-
-func chain_selected(index: int):
-	var newchain = file.get_chain_using_index(index)
-	if newchain.resource_name != null or "":
-		label_current_chain.text = newchain.resource_name
-	load_chain_into_editor(index)
-	pass
-
-func update_chains():
-	var old_selected
-	var str_chain_index = startChain.selected
-	var str_chain_text
-	
-	if lstChain.is_anything_selected():
-		old_selected = lstChain.get_selected_items()[0]
-	if str_chain_index:
-		str_chain_text  = startChain.get_item_text(startChain.selected)
-	
-	lstChain.clear()
-	startChain.clear()
-	
-	for chain in file.get_chains():
-		lstChain.add_item(chain.name)
-		startChain.add_item(chain.name)
-	if old_selected:
-		lstChain.select(old_selected)
-	startChain.select(str_chain_index)
-	pass
-
-func _on_chain_selected(index: int):
-	chain_selected(index)
+func _on_dialogue_section_updated(data: GDChains):
 	pass

@@ -1,1 +1,0 @@
-This sector is in control and command of the flow of power the machine generates. Where power goes and how much of it. 

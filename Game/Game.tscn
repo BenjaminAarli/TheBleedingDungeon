@@ -6,7 +6,7 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_snyqd"]
 shader = ExtResource("2_05twp")
-shader_parameter/colors = 2.0
+shader_parameter/colors = 1.0
 shader_parameter/dither = 0.5
 
 [sub_resource type="Gradient" id="Gradient_vgssa"]
@@ -84,7 +84,6 @@ offset_left = 1152.0
 offset_right = 1664.0
 offset_bottom = 1080.0
 theme = SubResource("Theme_ba7mv")
-metadata/_edit_group_ = true
 
 [node name="ColorRect3" type="ColorRect" parent="Text"]
 layout_mode = 1
@@ -119,7 +118,7 @@ anchor_bottom = 1.0
 offset_left = 32.0
 offset_top = 88.0
 offset_right = -32.0
-offset_bottom = -240.0
+offset_bottom = -312.0
 grow_horizontal = 2
 grow_vertical = 2
 bbcode_enabled = true
@@ -129,3 +128,11 @@ Noone was injured but the man has his  truck stolen. A quick brown fox stooped i
 
 A quick brown fox stooped into the rescue. Noone was injured but the man has his "
 scroll_following = true
+
+[node name="LineEdit" type="LineEdit" parent="Text"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 776.0
+offset_right = 488.0
+offset_bottom = 832.0
+flat = true

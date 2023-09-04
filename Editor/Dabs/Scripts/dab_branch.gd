@@ -21,11 +21,11 @@ func set_data(cog: cog_branch):
 	pass
 
 func get_cog():
-	var cog: cog_branch = cog_branch.new()
+	var cog := cog_branch.new()
 	cog.text 		= text
 	cog.hidden 		= is_hidden
 	cog.conditions 	= conditions
-	cog.effectors = effectors
+	cog.effectors   = effectors
 	return cog
 
 func _on_die_pressed():

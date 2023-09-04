@@ -1,1 +1,0 @@
-Above the sightline of the towers that peak are the towers of man. 

@@ -16,7 +16,7 @@ func set_data(cog: cog_tree):
 	pass
 
 func get_cog():
-	var cog: cog_tree = cog_tree.new()
+	var cog := cog_tree.new()
 	cog.text = text
 	return cog
 

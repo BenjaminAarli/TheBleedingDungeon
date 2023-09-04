@@ -1,14 +1,1 @@
-
-
-
-
-The game uses nodes to process data. 
-
-
-
-You have some skills: 
-	* Faith
-	* Mechanic
-	* Wire
-	* Medical
-
+The game is a dungeon crawler with dice rolls and skill checks. 

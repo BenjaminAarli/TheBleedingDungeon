@@ -1,7 +1,7 @@
 extends Dab
 class_name Dab_Tree_End
 
-var text 	= ""
+var text = ""
 
 func _ready():
 	add_to_group(Data.cogtypes.treeend)
@@ -13,7 +13,7 @@ func set_data(cog: cog_tree_end):
 	pass
 
 func get_cog():
-	var cog: cog_tree_end = cog_tree_end.new()
+	var cog := cog_tree_end.new()
 	cog.text = text
 	return cog
 
